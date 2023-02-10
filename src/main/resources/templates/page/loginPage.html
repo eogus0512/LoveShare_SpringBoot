@@ -6,17 +6,21 @@
   <link th:href="@{/css/bootstrap_lux.css}" href="../css/bootstrap_lux.css" rel="stylesheet">
 </head>
 <body>
-  <form th:action th:object="${loginForm}" method="post" class="form-group">
-    <label class="form-label mt-4">로그인</label>
-    <div class="form-floating mb-3">
-      <input type="id" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">ID</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
-    </div>
-  </form>
-  <a href="join">회원가입</a>
+<div class="container">
+  <div class="py-5 text-center"><br><br><br><br><br>
+    <form th:action th:object="${loginForm}" method="post" class="form-group">
+      <legend>로그인</legend><br>
+      <div class="form-floating mb-3">
+        <input type="id" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">ID</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+    </form>
+    <a href="join">회원가입</a>
+  </div>
+</div>
 </body>
 </html>

@@ -6,66 +6,70 @@
   <link th:href="@{/css/bootstrap_lux.css}" href="../css/bootstrap_lux.css" rel="stylesheet">
 </head>
 <body>
-<form th:action th:object="${member}" method="post">
-  <fieldset>
-    <legend>회원가입</legend>
-    <div class="form-group">
-      <label for="loginId" class="form-label mt-4">ID</label>
-      <input type="text" class="form-control" id="loginId" name="loginId" aria-describedby="IdHelp" placeholder="ID">
-      <small id="IdHelp" class="form-text text-muted">아이디는 필수입력사항입니다.</small>
-    </div>
-    <div class="form-group">
-      <label for="password" class="form-label mt-4">비밀번호</label>
-      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <label for="userName" class="form-label mt-4">이름</label>
-      <input type="text" class="form-control" id="userName" name="userName" placeholder="이름을 입력하세요.">
-    </div>
-    <div class="form-group">
-      <label for="nickName" class="form-label mt-4">닉네임</label>
-      <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 입력하세요.">
-    </div>
-    <div class="form-group">
-      <label for="age" class="form-label mt-4">나이</label>
-      <select class="form-select" id="age" name="age">
-        <option>15</option>
-        <option>16</option>
-        <option>17</option>
-        <option>18</option>
-        <option>19</option>
-        <option>20</option>
-        <option>21</option>
-        <option>22</option>
-        <option>23</option>
-        <option>24</option>
-        <option>25</option>
-        <option>26</option>
-        <option>27</option>
-        <option>28</option>
-        <option>29</option>
-        <option>30</option>
-        <option>31</option>
-        <option>32</option>
-        <option>33</option>
-        <option>34</option>
-      </select>
-    </div>
-    <label for="man" class="form-label mt-4">성별</label>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="gender" id="man" value="man" checked="">
-      <label class="form-check-label" for="man">
-        남자
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="gender" id="women" value="women">
-      <label class="form-check-label" for="women">
-        여자
-      </label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </fieldset>
-</form>
+<div class="container">
+  <div class="py-5 text-center"><br><br><br><br><br>
+    <form th:action th:object="${member}" method="post">
+      <fieldset>
+        <legend>회원가입</legend>
+        <div class="form-group">
+          <label for="loginId" class="form-label mt-4">ID</label>
+          <input type="text" class="form-control" id="loginId" name="loginId" aria-describedby="IdHelp" placeholder="ID">
+          <small id="IdHelp" class="form-text text-muted">아이디는 필수입력사항입니다.</small>
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label mt-4">비밀번호</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="userName" class="form-label mt-4">이름</label>
+          <input type="text" class="form-control" id="userName" name="userName" placeholder="이름을 입력하세요.">
+        </div>
+        <div class="form-group">
+          <label for="nickName" class="form-label mt-4">닉네임</label>
+          <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 입력하세요.">
+        </div>
+        <div class="form-group">
+          <label for="age" class="form-label mt-4">나이</label>
+          <select class="form-select" id="age" name="age">
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>23</option>
+            <option>24</option>
+            <option>25</option>
+            <option>26</option>
+            <option>27</option>
+            <option>28</option>
+            <option>29</option>
+            <option>30</option>
+            <option>31</option>
+            <option>32</option>
+            <option>33</option>
+            <option>34</option>
+          </select>
+        </div>
+        <label for="man" class="form-label mt-4">성별</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="man" value="man" checked="">
+          <label class="form-check-label" for="man">
+            남자
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="women" value="women">
+          <label class="form-check-label" for="women">
+            여자
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
 </body>
 </html>
