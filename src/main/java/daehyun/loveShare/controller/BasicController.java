@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class BasicController {
-    @GetMapping("navbar")
+    @GetMapping("/main")
     public String navbar() {
-        return "layout/layout";
+        return "page/main";
     }
 }

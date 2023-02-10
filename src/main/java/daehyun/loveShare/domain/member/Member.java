@@ -1,4 +1,4 @@
-package daehyun.loveShare.domain;
+package daehyun.loveShare.domain.member;
 
 import lombok.Data;
 
@@ -11,13 +11,13 @@ public class Member {
     @NotEmpty
     private String loginId;
     @NotEmpty
-    private String Password;
+    private String password;
     @NotEmpty
     private String userName;
     @NotEmpty
     private String nickName;
     @NotEmpty
-    private Long age;
+    private String age;
     @NotEmpty
     private String gender;
 
