@@ -1,24 +1,39 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
   <title>러브쉐어</title>
   <meta charset="utf-8">
   <link th:href="@{/css/bootstrap_lux.css}" href="../css/bootstrap_lux.css" rel="stylesheet">
+  <style>
+    .container {
+      max-width: 560px;
+    }
+    .field-error {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
-  <div class="py-5 text-center"><br><br><br><br><br>
-    <form th:action th:object="${loginForm}" method="post" class="form-group">
-      <legend>로그인</legend><br>
+  <div class="py-5 text-center"><br><br><br><br><br><br><br><br><br>
+    <h2>러브쉐어 로그인</h2><br>
+    <form th:action="login" th:object="${loginForm}" method="post" class="form-group">
+      <div th:if="${#fields.hasGlobalErrors()}">
+        <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+           th:text="${err}">전체 오류 메시지</p>
+      </div>
       <div class="form-floating mb-3">
-        <input type="id" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">ID</label>
+        <input type="id" class="form-control" id="loginId" name="loginId" th:field="*{loginId}" placeholder="ID">
+        <label for="loginId">ID</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-      </div>
-    </form>
+        <input type="password" class="form-control" id="password" name="password" th:field="*{password}" placeholder="Password">
+        <label for="password">Password</label>
+      </div><br>
+      <button type="submit" class="btn btn-primary bg-dark" style="width: 535px; font-size: 20px">로그인</button>
+    </form><br>
     <a href="join">회원가입</a>
   </div>
 </div>

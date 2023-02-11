@@ -1,5 +1,6 @@
 package daehyun.loveShare.domain.member;
 
+import daehyun.loveShare.domain.member.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 

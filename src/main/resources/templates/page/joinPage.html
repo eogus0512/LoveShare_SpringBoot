@@ -1,72 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>러브쉐어</title>
   <meta charset="utf-8">
   <link th:href="@{/css/bootstrap_lux.css}" href="../css/bootstrap_lux.css" rel="stylesheet">
+  <style>
+    .container {
+      max-width: 700px;
+    }
+    .field-error {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
-  <div class="py-5 text-center"><br><br><br><br><br>
+  <div class="py-5"><br><br><br><br><br>
+    <h2 class="text-center">회원가입</h2>
     <form th:action th:object="${member}" method="post">
       <fieldset>
-        <legend>회원가입</legend>
         <div class="form-group">
           <label for="loginId" class="form-label mt-4">ID</label>
-          <input type="text" class="form-control" id="loginId" name="loginId" aria-describedby="IdHelp" placeholder="ID">
+          <input type="text" class="form-control" th:errorclass="field-error" id="loginId" th:field="*{loginId}" aria-describedby="IdHelp" placeholder="ID">
           <small id="IdHelp" class="form-text text-muted">아이디는 필수입력사항입니다.</small>
+          <div th:class="field-error" th:errors="*{loginId}" />
         </div>
         <div class="form-group">
           <label for="password" class="form-label mt-4">비밀번호</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          <input type="password" class="form-control" th:errorclass="field-error" id="password" th:field="*{password}" placeholder="Password">
+          <div class="field-error" th:errors="*{password}" />
         </div>
         <div class="form-group">
           <label for="userName" class="form-label mt-4">이름</label>
-          <input type="text" class="form-control" id="userName" name="userName" placeholder="이름을 입력하세요.">
+          <input type="text" class="form-control" th:errorclass="field-error" id="userName" th:field="*{userName}" placeholder="이름을 입력하세요.">
+          <div class="field-error" th:errors="*{userName}" />
         </div>
         <div class="form-group">
           <label for="nickName" class="form-label mt-4">닉네임</label>
-          <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 입력하세요.">
+          <input type="text" class="form-control" th:errorclass="field-error" id="nickName" th:field="*{nickName}" placeholder="닉네임을 입력하세요.">
+          <div class="field-error" th:errors="*{nickName}" />
         </div>
         <div class="form-group">
           <label for="age" class="form-label mt-4">나이</label>
-          <select class="form-select" id="age" name="age">
-            <option>15</option>
-            <option>16</option>
-            <option>17</option>
-            <option>18</option>
-            <option>19</option>
-            <option>20</option>
-            <option>21</option>
-            <option>22</option>
-            <option>23</option>
-            <option>24</option>
-            <option>25</option>
-            <option>26</option>
-            <option>27</option>
-            <option>28</option>
-            <option>29</option>
-            <option>30</option>
-            <option>31</option>
-            <option>32</option>
-            <option>33</option>
-            <option>34</option>
+          <select class="form-select" th:errorclass="field-error" id="age" th:field="*{age}">
+            <option value="" selected="selected">나이를 선택하세요.</option>
+            <th:block th:each="num : ${#numbers.sequence(14, 50)}">
+              <option th:text="${num}" th:value="${num}"></option>
+            </th:block>
           </select>
+          <div class="field-error" th:errors="*{age}" />
         </div>
-        <label for="man" class="form-label mt-4">성별</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gender" id="man" value="man" checked="">
-          <label class="form-check-label" for="man">
+        <label class="form-label mt-4">성별</label>
+        <div class="form-check" th:each="type : ${genderType}">
+          <input class="form-check-input" th:errorclass="field-error" type="radio" th:field="*{gender}" th:value="${type.name()}">
+          <label class="form-check-label"  th:for="${#ids.prev('gender')}" th:text="${type.description}">
             남자
           </label>
+          <div class="field-error" th:errors="*{gender}" />
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gender" id="women" value="women">
-          <label class="form-check-label" for="women">
-            여자
-          </label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <button type="submit" class="btn btn-primary text-center bg-dark" style="width: 680px; font-size: 20px">확인</button>
       </fieldset>
     </form>
   </div>

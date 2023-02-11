@@ -1,5 +1,8 @@
-package daehyun.loveShare.domain.member;
+package daehyun.loveShare.web.member;
 
+import daehyun.loveShare.domain.member.GenderType;
+import daehyun.loveShare.domain.member.Member;
+import daehyun.loveShare.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -28,7 +31,11 @@ public class MemberController {
         }
 
         memberRepository.save(member);
-        return "redirect:/main";
+        return "redirect:/";
     }
 
+    @ModelAttribute("genderType")
+    public GenderType[] gender() {
+        return GenderType.values();
+    }
 }
