@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="feed">피드
+                    <a class="nav-link active" href="main">피드
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
@@ -33,7 +33,9 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="report">문제신고</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout">로그아웃</a>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="dropdown-item">로그아웃</button>
+                        </form>
                     </div>
                 </li>
             </ul>
