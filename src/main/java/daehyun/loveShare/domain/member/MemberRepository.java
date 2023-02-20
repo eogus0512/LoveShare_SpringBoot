@@ -1,36 +1,15 @@
 package daehyun.loveShare.domain.member;
 
-import daehyun.loveShare.domain.member.Member;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+import java.util.Optional;
 
-import java.util.*;
+public interface MemberRepository {
+    Member save(Member member);
+    Member findById(Long id);
+    Optional<Member> findByLoginId(String loginId);
 
-@Repository
-@Slf4j
-public class MemberRepository {
-    private static Map<Long, Member> store = new HashMap<>();
-    private static long sequence = 0L;
+    Optional<Member> findByUserName(String userName);
 
-    public Member save(Member member) {
-        member.setId(++sequence);
-        log.info("save: member={}", member);
-        store.put(member.getId(), member);
-        return member;
-    }
-
-    public Member findById(Long id) {
-        return store.get(id);
-    }
-    public Optional<Member> findByLoginId(String loginId) {
-        return findAll().stream()
-                .filter(m -> m.getLoginId().equals(loginId))
-                .findFirst();
-    }
-    public List<Member> findAll() {
-        return new ArrayList<>(store.values());
-    }
-    public void clearStore() {
-        store.clear();
-    }
+    Optional<Member> findByNickName(String name);
+    List<Member> findAll();
 }

@@ -2,11 +2,15 @@ package daehyun.loveShare.domain.member;
 
 import lombok.Data;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 @Data
 public class Member {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty(message = "아이디는 필수 입력사항입니다.")
@@ -30,8 +34,4 @@ public class Member {
     private String gender;
 
     private String loverName;
-
-
-
-
 }

@@ -5,6 +5,7 @@ import daehyun.loveShare.domain.member.Member;
 import daehyun.loveShare.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/join")
+@Transactional
 public class MemberController {
     private final MemberRepository memberRepository;
 
