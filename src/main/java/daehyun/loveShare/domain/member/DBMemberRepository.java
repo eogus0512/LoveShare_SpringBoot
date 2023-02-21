@@ -1,12 +1,16 @@
 package daehyun.loveShare.domain.member;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
 @Primary
+@Repository
+@Slf4j
 public class DBMemberRepository implements MemberRepository{
 
     private final EntityManager em;
@@ -17,6 +21,7 @@ public class DBMemberRepository implements MemberRepository{
 
     @Override
     public Member save(Member member) {
+        log.info("save: member={}", member);
         em.persist(member);
         return member;
     }
@@ -29,8 +34,10 @@ public class DBMemberRepository implements MemberRepository{
 
     @Override
     public Optional<Member> findByLoginId(String loginId) {
-        Member member = em.find(Member.class, loginId);
-        return Optional.ofNullable(member);
+        List<Member> result = em.createQuery("select m from Member m where m.loginId = :loginId", Member.class)
+                .setParameter("loginId", loginId)
+                .getResultList();
+        return result.stream().findAny();
     }
 
     @Override

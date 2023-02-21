@@ -16,8 +16,8 @@ import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/join")
 @Transactional
+@RequestMapping("/join")
 public class MemberController {
     private final MemberRepository memberRepository;
 
