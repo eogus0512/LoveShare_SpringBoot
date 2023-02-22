@@ -65,7 +65,7 @@ public class DBMemberRepository implements MemberRepository{
     @Override
     public Optional<Member> findByLoverName(String loverName) {
         List<Member> result = em.createQuery("select m from Member m where m.loverName = :loverName", Member.class)
-                .setParameter(loverName, loverName)
+                .setParameter("loverName", loverName)
                 .getResultList();
         return result.stream().findAny();
     }
