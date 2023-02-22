@@ -1,9 +1,18 @@
 <!DOCTYPE html>
-<html th:fragment="layout (title)" xmlns:th="http://www.thymeleaf.org">
+<html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:replace="${title}">레이아웃 타이틀</title>
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap_lux.css}" href="../css/bootstrap_lux.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 700px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -46,6 +55,12 @@
         </div>
     </div>
 </nav>
+<div class="container" >
+    <div class="py-5">
+        <div th:replace="${content}">
+        </div>
+    </div>
+</div>
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

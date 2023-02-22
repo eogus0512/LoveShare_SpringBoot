@@ -41,6 +41,13 @@ public class MemoryMemberRepository implements MemberRepository{
                 .findFirst();
     }
 
+    @Override
+    public Optional<Member> findByLoverName(String loverName) {
+        return findAll().stream()
+                .filter(m -> m.getLoginId().equals(loverName))
+                .findFirst();
+    }
+
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
     }

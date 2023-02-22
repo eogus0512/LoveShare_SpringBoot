@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/common_layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>러브쉐어</title>
+</head>
+<body>
+<section class="text-center">
+    <div th:if="${session.loginMember.loverName == null}" style="max-height: 700px;">
+        <div th:unless="${subscriber== null}">
+        </div>
+        <br><br><br><br><br><br><br><br>
+        <form th:action method="post">
+            <div class="form-group">
+                <h3>연인의 아이디를 입력하세요.</h3><br>
+                <input type="text" class="form-control" id="loverName" name="loverName">
+                <br><button type="submit" class="btn btn-primary bg-dark">등록</button>
+            </div>
+        </form>
+    </div>
+    <div th:unless="${session.loginMember.loverName == null}">
+        연인있음
+    </div>
+</section>
+</body>
+</html>
