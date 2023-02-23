@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
