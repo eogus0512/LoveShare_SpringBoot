@@ -19,7 +19,7 @@
 <div class="container">
   <div class="py-5 text-center"><br><br><br><br><br><br><br><br><br>
     <h2>러브쉐어 로그인</h2><br>
-    <form th:action="login" th:object="${loginForm}" method="post" class="form-group">
+    <form th:action th:object="${loginForm}" method="post" class="form-group">
       <div th:if="${#fields.hasGlobalErrors()}">
         <p class="field-error" th:each="err : ${#fields.globalErrors()}"
            th:text="${err}">전체 오류 메시지</p>

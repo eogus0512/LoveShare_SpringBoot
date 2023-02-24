@@ -11,11 +11,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.servlet.http.Cookie;
+import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,7 +28,10 @@ public class LoginController {
     }
 
     @PostMapping("login")
-    public String login(@ModelAttribute LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request) {
+    public String login(@Valid @ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult,
+                        @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
+
+        log.info("redirectURL? {}", redirectURL);
         if (bindingResult.hasErrors()) {
             return "page/loginPage";
         }
@@ -37,7 +39,7 @@ public class LoginController {
         Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
         log.info("login? {}", loginMember);
 
-        //로그인 실패
+        //로그인 실패  
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "page/loginPage";
@@ -46,8 +48,7 @@ public class LoginController {
         //로그인 성공, 세션 생성
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-
-        return "redirect:/";
+        return "redirect:" + redirectURL;
     }
 
     @PostMapping("logout")
