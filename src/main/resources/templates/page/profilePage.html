@@ -6,7 +6,7 @@
 <body>
 <section class="text-center">
     <div th:if="${session.loginMember.loverName == null}" style="max-height: 700px;">
-        <div th:unless="${subscriber == null}">
+        <div th:if="${subscriberName == null}">
             <br><br><br><br><br><br><br><br>
             <form th:action="profile-request" method="post">
                 <div class="form-group">
@@ -16,20 +16,34 @@
                 </div>
             </form>
         </div>
-        <div th:if="${subscriber == null}">
-            <span th:text="${subscriber.userName}"></span>
-            <span>님의 연인관계 요청이 있습니다.</span><br>
-            <span>요청을 수락하시겠습니까?</span><br>
+        <div th:unless="${subscriberName == null}">
+            <br><br><br><br><br><br><br><br>
+            <h3><span th:text="${subscriberName}"></span>님의 연인관계 요청이 있습니다.</h3>
+            <h3>요청을 수락하시겠습니까?</h3>
             <form th:action="profile-accept" method="post">
-                <button type="submit" class="btn btn-primary bg-dark">수락</button>
-            </form>
+                <input type="hidden" id="subscriberName1" name="subscriberName1" th:value="${subscriberName}">
+                <button type="submit" class="btn btn-primary bg-dark" style="width: 200px; font-size: 20px">수락</button>
+            </form><br>
             <form th:action="profile-reject" method="post">
-                <button type="submit" class="btn btn-primary bg-dark">거절</button>
+                <input type="hidden" id="subscriberName2" name="subscriberName2" th:value="${subscriberName}">
+                <button type="submit" class="btn btn-primary bg-dark" style="width: 200px; font-size: 20px">거절</button>
             </form>
         </div>
     </div>
     <div th:unless="${session.loginMember.loverName == null}">
-        연인있음
+        <div th:if="${subscriberName == null}">
+            <br><br><br><br><br><br><br><br>
+            <form th:action="profile-request-cancel" method="post">
+                <div class="form-group">
+                    <h3>현재 <span th:text="${session.loginMember.loverName}"></span>님의 수락을 기다리는 중입니다.</h3><br>
+                    <br><button type="submit" class="btn btn-primary bg-dark">요청 취소</button>
+                </div>
+            </form>
+        </div>
+        <div th:unless="${subscriberName == null}">
+            <br><br><br><br><br><br><br><br>
+            연인 있음
+        </div>
     </div>
 </section>
 </body>

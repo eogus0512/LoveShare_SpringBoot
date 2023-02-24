@@ -26,25 +26,51 @@ public class ProfileController {
     public String profile(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        if (member.getLoverName() == null) {
-            Optional<Member> subscriber = memberRepository.findByLoverName((String) session.getAttribute("loginId"));
-            if (subscriber != null) {
-                model.addAttribute("subscriber", subscriber);
-            }
+        Optional<Member> subscriber = memberRepository.findByLoverName(member.getLoginId());
+        log.info("subscriber? {}", subscriber);
+        if (subscriber.isPresent()) {
+            model.addAttribute("subscriberName", subscriber.get().getLoginId());
+        } else {
+            model.addAttribute("subscriberName", null);
         }
+
         return "page/profilePage";
     }
 
     @PostMapping("/profile-request")
     public String profile_request(@RequestParam String loverName, HttpServletRequest request) {
+        update(loverName, request);
+        return "redirect:/profile";
+    }
+
+    @PostMapping("/profile-request-cancel")
+    public String profile_request_cancel(HttpServletRequest request) {
+        update(null, request);
+        return "redirect:/profile";
+    }
+
+    @PostMapping("/profile-accept")
+    public String profile_accept(@RequestParam("subscriberName1") String subscriber, HttpServletRequest request, Model model) {
+        update(subscriber, request);
+        model.addAttribute("subscriberName", subscriber);
+        return "redirect:/profile";
+    }
+
+    @PostMapping("/profile-reject")
+    public String profile_reject(@RequestParam("subscriberName2") String subscriber) {
+        Optional<Member> member = memberRepository.findByLoginId(subscriber);
+        Member update = memberRepository.findById(member.get().getId());
+        update.setLoverName(null);
+        return "redirect:/profile";
+    }
+
+    public void update(String data, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
         Member update = memberRepository.findById(member.getId());
-        update.setLoverName(loverName);
-
+        update.setLoverName(data);
         session.setAttribute(SessionConst.LOGIN_MEMBER, update);
         log.info("session? {}", update);
-        return "redirect:/profile";
     }
 }
