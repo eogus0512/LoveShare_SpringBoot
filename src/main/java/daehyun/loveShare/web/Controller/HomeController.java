@@ -3,7 +3,6 @@ package daehyun.loveShare.web.Controller;
 import daehyun.loveShare.domain.login.LoginForm;
 import daehyun.loveShare.domain.member.Member;
 import daehyun.loveShare.web.SessionConst;
-import daehyun.loveShare.web.argumentresolver.Login;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
