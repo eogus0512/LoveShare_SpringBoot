@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/common_layout :: layout(~{::title}, ~{::section})}">
+<head>
+  <title>러브쉐어</title>
+</head>
+<body>
+<section class="text-center">
+  <img th:each="image : ${post.images}" th:src="|/images/${image.getStoreFileName()}|" width="300" height="300"/><br>
+  <span th:text="${post.content}">글내용</span><br>
+  <span th:text="${post.hashTag}">해시태크</span>
+</section>
+</body>
+</html>

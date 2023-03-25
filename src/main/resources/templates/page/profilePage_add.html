@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/common_layout :: layout(~{::title}, ~{::section})}">
+<head>
+  <title>러브쉐어</title>
+</head>
+<body>
+<section class="text-center">
+  <form th:action method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>게시물 등록</legend>
+      <div class="form-group">
+        <label for="images" class="form-label mt-4" style="float: left">이미지</label>
+        <input class="form-control" type="file" multiple="multiple" id="images" name="images">
+      </div>
+      <div class="form-group">
+      <label for="content" class="form-label mt-4" style="float: left">내용</label>
+      <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label mt-4" for="hashTag" style="float: left">해시태그</label>
+        <input type="text" class="form-control" placeholder="해시태그를 추가해보세요" id="hashTag" name="hashTag">
+      </div><br>
+      <button type="submit" class="btn btn-primary">등록</button>
+    </fieldset>
+  </form>
+</section>
+</body>
+</html>

@@ -1,18 +1,24 @@
-package daehyun.loveShare.web.Controller;
+package daehyun.loveShare.web.profile;
 
 import daehyun.loveShare.domain.member.Member;
 import daehyun.loveShare.domain.member.MemberRepository;
+import daehyun.loveShare.domain.profile.*;
 import daehyun.loveShare.web.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.repository.query.Param;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -21,6 +27,8 @@ import java.util.Optional;
 @Transactional
 public class ProfileController {
     private final MemberRepository memberRepository;
+    private final PostRepository postRepository;
+    private final FileStore fileStore;
 
     @GetMapping("/profile")
     public String profile(Model model, HttpServletRequest request) {
@@ -62,6 +70,50 @@ public class ProfileController {
         Member update = memberRepository.findById(member.get().getId());
         update.setLoverName(null);
         return "redirect:/profile";
+    }
+
+    @GetMapping("/profile-add")
+    public String addPost(@ModelAttribute PostForm form) {
+        return "page/profilePage_add";
+    }
+
+    @PostMapping("/profile-add")
+    public String savePost(@ModelAttribute PostForm form, RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
+        List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImages());
+
+        //데이터베이스에 저장
+        Post post = new Post();
+        HttpSession session = request.getSession();
+        Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        log.info("gender={}", member.getGender());
+        if (member.getGender().equals("MEN")) {
+            post.setBoyFriend(member.getLoginId());
+            post.setGirlFriend(member.getLoverName());
+        } else {
+            post.setBoyFriend(member.getLoverName());
+            post.setGirlFriend(member.getLoginId());
+        }
+        post.setContent(form.getContent());
+        post.setHashTag(form.getHashTag());
+        post.setImages(storeImageFiles);
+        log.info("post={}", post);
+        postRepository.save(post);
+
+        redirectAttributes.addAttribute("postId", post.getId());
+        return "redirect:/profile/post/{postId}";
+    }
+
+    @GetMapping("/profile/post/{id}")
+    public String posts(@PathVariable Long id, Model model) {
+        Post post = postRepository.findById(id);
+        model.addAttribute("post", post);
+        return "page/profilePage_post";
+    }
+
+    @ResponseBody
+    @GetMapping("/images/{filename}")
+    public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
+        return new UrlResource("file:" + fileStore.getFullPath(filename));
     }
 
     public void update(String data, HttpServletRequest request) {
