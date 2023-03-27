@@ -104,7 +104,7 @@ public class ProfileController {
     }
 
     @GetMapping("/profile/post/{id}")
-    public String posts(@PathVariable Long id, Model model) {
+    public String post_view(@PathVariable Long id, Model model) {
         Post post = postRepository.findById(id);
         model.addAttribute("post", post);
         return "page/profilePage_post";
@@ -114,6 +114,29 @@ public class ProfileController {
     @GetMapping("/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
         return new UrlResource("file:" + fileStore.getFullPath(filename));
+    }
+
+    @GetMapping("/profile/posts")
+    public String redirect_posts(RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (member.getGender().equals("MEN")) {
+            redirectAttributes.addAttribute("boyFriend", member.getLoginId());
+            redirectAttributes.addAttribute("girlFriend", member.getLoverName());
+        } else {
+            redirectAttributes.addAttribute("boyFriend", member.getLoverName());
+            redirectAttributes.addAttribute("girlFriend", member.getLoginId());
+        }
+
+        return "redirect:/profile/couple/{boyFriend}/{girlFriend}";
+    }
+
+    @GetMapping("/profile/couple/{boyFriend}/{girlFriend}")
+    public String couplePosts(@PathVariable String boyFriend, @PathVariable String girlFriend, Model model) {
+        List<Post> post = postRepository.findByBoyFriend(boyFriend);
+        log.info("post={}", post);
+        model.addAttribute("post", post);
+        return "page/profilePage_couple";
     }
 
     public void update(String data, HttpServletRequest request) {

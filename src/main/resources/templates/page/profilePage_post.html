@@ -5,9 +5,31 @@
 </head>
 <body>
 <section class="text-center">
-  <img th:each="image : ${post.images}" th:src="|/images/${image.getStoreFileName()}|" width="300" height="300"/><br>
-  <span th:text="${post.content}">글내용</span><br>
-  <span th:text="${post.hashTag}">해시태크</span>
+  <span th:text="${post.boyFriend}" style="font-size: 20px"></span>
+  <span style="font-size: 20px">&hearts;</span>
+  <span th:text="${post.girlFriend}"  style="font-size: 20px"></span><br><br>
+  <div id="carouselControls" class="carousel slide" data-bs-ride="carousel" style="width:360px;height:480px;margin: auto;">
+    <div class="carousel-inner">
+      <div class="carousel-item" th:each="image, i : ${post.images}"
+           th:classappend="${i.index == 0} ? 'active'">
+        <img th:src="|/images/${image.getStoreFileName()}|" width="360" height="480"/>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div><br><br>
+  <div class="card border-primary mb-3" style="width:360px;margin: auto;">
+    <div class="card-body">
+      <span class="card-text" th:text="${post.content}" style="font-size: 18px">글내용</span><br>
+      <span class="card-text" th:text="${post.hashTag}" style="font-size: 15px">해시태크</span>
+    </div>
+  </div>
 </section>
 </body>
 </html>

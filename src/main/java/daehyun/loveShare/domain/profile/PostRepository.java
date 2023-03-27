@@ -1,5 +1,6 @@
 package daehyun.loveShare.domain.profile;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PostRepository {
@@ -12,5 +13,7 @@ public interface PostRepository {
 
     Post findById(Long id);
     Optional<Post> findByHashTag(String hashTag);
+
+    List<Post> findByBoyFriend(String boyFriend);
 
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/common_layout :: layout(~{::title}, ~{::section})}">
+<head>
+  <title>러브쉐어</title>
+</head>
+<body>
+<section class="text-center">
+  <div>
+    <div style="float: left">
+      <span th:text="${boyFriend}" style="font-size: 20px"></span>
+      <span style="font-size: 20px">&hearts;</span>
+      <span th:text="${girlFriend}"  style="font-size: 20px"></span>
+      <span style="font-size: 15px">의 공간</span>
+    </div>
+    <button th:if="${session.loginMember.loginId == boyFriend || session.loginMember.loginId == girlFriend}"
+            type="button" class="btn btn-outline-dark" style="font-size: 30px; float: right" onclick="location.href='/profile-add'">+</button>
+  </div><br><br><br>
+
+  <div class="row">
+    <div class="col-4" th:each="p : ${post}">
+      <div class="card" style="margin-bottom: 20px">
+        <a th:href="@{/profile/post/{id}(id=${p.id})}">
+          <img th:src="|/images/${p.images[0].getStoreFileName()}|" class="card-img-top">
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+</body>
+</html>

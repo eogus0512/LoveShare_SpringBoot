@@ -47,4 +47,11 @@ public class DBPostRepository implements PostRepository{
                 .getResultList();
         return result.stream().findAny();
     }
+
+    @Override
+    public List<Post> findByBoyFriend(String boyFriend) {
+        return em.createQuery("select m from Post m where m.boyFriend = :boyFriend", Post.class)
+                .setParameter("boyFriend", boyFriend)
+                .getResultList();
+    }
 }
