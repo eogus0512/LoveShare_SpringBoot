@@ -25,3 +25,4 @@
 * [(Spring Boot) 웹 개발 프로젝트 - 7](https://eogus0512.github.io/project/2023/02/27/(Spring-Boot)-%EC%9B%B9-%EA%B0%9C%EB%B0%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-7.html)
 * [(Spring Boot) 웹 개발 프로젝트 - 8](https://eogus0512.github.io/project/2023/03/24/(Spring-Boot)-%EC%9B%B9-%EA%B0%9C%EB%B0%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-8.html)
 * [(Spring Boot) 웹 개발 프로젝트 - 9](https://eogus0512.github.io/project/2023/04/01/(Spring-Boot)-%EC%9B%B9-%EA%B0%9C%EB%B0%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-9.html)
+* [(Spring Boot) 웹 개발 프로젝트 - 10](https://eogus0512.github.io/2023/05/14/(Spring-Boot)-%EC%9B%B9-%EA%B0%9C%EB%B0%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-10.html)
