@@ -104,7 +104,7 @@ public class ProfileController {
     }
 
     @GetMapping("/profile/post/{id}")
-    public String post_view(@PathVariable Long id, Model model) {
+    public String postView(@PathVariable Long id, Model model) {
         Post post = postRepository.findById(id);
         model.addAttribute("post", post);
         return "page/profilePage_post";
